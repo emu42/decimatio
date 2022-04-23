@@ -22,7 +22,7 @@ public class LegionnaireImageModel implements IModel<ResourceReference> {
             boolean isPlayerCharacter = player.getCharacter().equals(legionnaire);
             boolean isNemesis = false;
             String numPart;
-
+            String action = "idle";
             if (isPlayerCharacter) {
                 numPart = "02";
             } else if (isNemesis) {
@@ -31,7 +31,18 @@ public class LegionnaireImageModel implements IModel<ResourceReference> {
                 numPart = "01";
             }
 
-            image = "imgs/legionnaire" + numPart + "_idle.png";
+            if (GameSessionSingleton.getTheSingleton().getGameState().getStatus() == GameStatus.MOVING) {
+                switch (legionnaire.getUpcomingMove()) {
+                    case PUSH_LEFT:
+                        action = "pushleft";
+                        break;
+                    case PUSH_RIGHT:
+                        action = "pushright";
+                        break;
+                }
+            }
+
+            image = "imgs/legionnaire" + numPart + "_" + action + ".png";
         } else {
             image = "imgs/blank.png";
         }

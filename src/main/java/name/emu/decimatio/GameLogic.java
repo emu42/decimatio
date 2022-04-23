@@ -2,8 +2,15 @@ package name.emu.decimatio;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
 
 public class GameLogic {
+
+    public static final int INPUT_TIME_MILLIS = 5000;
+
+    public static final int MOVE_TIME_MILLIS = 5000;
+
+    private static Timer TIMER = new Timer();
 
     public static synchronized void addPlayer(GameState gameState, Player player) {
         if (!gameState.getPlayers().contains(player)) {
@@ -23,12 +30,19 @@ public class GameLogic {
 
         // create AI characters
         while (legionnaireList.size()<10) {
-            Legionnaire legionaire = Legionnaire.builder().playerCharacter(false).name("L"+legionnaireList.size()).upcomingMove(Move.NONE).build();
-            legionnaireList.add(legionaire);
+            Legionnaire legionnaire = Legionnaire.builder().playerCharacter(false).name("L"+legionnaireList.size()).upcomingMove(Move.NONE).build();
+            legionnaireList.add(legionnaire);
         }
 
         Collections.shuffle(legionnaireList);
-        gameState.setStatus(GameStatus.RUNNING);
+        gameState.setStatus(GameStatus.INPUT);
+
+        TIMER.schedule(new PerformTurnTimerTask(gameState), INPUT_TIME_MILLIS);
+    }
+
+    public static void showMove(GameState gameState) {
+        gameState.setStatus(GameStatus.MOVING);
+        TIMER.schedule(new PerformTurnTimerTask(gameState), MOVE_TIME_MILLIS);
     }
 
     public static void performTurn(GameState gameState) {
@@ -52,16 +66,19 @@ public class GameLogic {
         for (Legionnaire legionnaire : gameState.getLegionnaires()) {
             legionnaire.setUpcomingMove(Move.NONE);
         }
+
+        // schedule next update
+        TIMER.schedule(new ShowMoveTimerTask(gameState), INPUT_TIME_MILLIS);
     }
 
     private static void shiftPositions(final List<Legionnaire> legionnaires, int moveVector) {
         while (moveVector < 0) {
-            legionnaires.add(legionnaires.get(0));
+            legionnaires.add(legionnaires.remove(0));
             moveVector++;
         }
 
         while (moveVector > 0) {
-            legionnaires.add(0, legionnaires.get(legionnaires.size()-1));
+            legionnaires.add(0, legionnaires.remove(legionnaires.size()-1));
             moveVector--;
         }
     }

@@ -3,7 +3,9 @@ package name.emu.decimatio;
 public enum GameStatus {
     LOBBY,
 
-    RUNNING,
+    MOVING,
+
+    INPUT,
 
     ENDROUND,
 
