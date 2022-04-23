@@ -69,7 +69,20 @@ public class GameLogic {
         Legionnaire decimated = gameState.getLegionnaires().get(gameState.getTenthSlotPos()-1);
         decimated.setUpcomingMove(Move.DEAD);
 
+        updateScore(gameState);
+
         incrementVersion(gameState);
+    }
+
+    private static void updateScore(final GameState gameState) {
+        for (Player player: gameState.getPlayers()) {
+            if (player.getCharacter().getUpcomingMove() != Move.DEAD) {
+                player.setScore(player.getScore() + 10);
+            }
+            if (player.getCharacter().getNemesis().getUpcomingMove() == Move.DEAD) {
+                player.setScore(player.getScore() + 20);
+            }
+        }
     }
 
     public static void performTurn(GameState gameState) {

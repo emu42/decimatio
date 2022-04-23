@@ -22,7 +22,7 @@ public class LegionnaireImageModel implements IModel<ResourceReference> {
         if (legionnaire != null) {
             Player player = GameSessionSingleton.findOrCreateForSessionId(Session.get().getId());
             boolean isPlayerCharacter = player.getCharacter().equals(legionnaire);
-            boolean isNemesis = false;
+            boolean isNemesis = legionnaire.equals(player.getCharacter().getNemesis());
             String numPart;
             String action = "idle";
             if (isPlayerCharacter) {

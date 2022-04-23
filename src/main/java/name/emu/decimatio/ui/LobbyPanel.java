@@ -24,10 +24,13 @@ public class LobbyPanel extends Panel {
         super(id, gameState);
         this.gameState = gameState;
         List<IColumn<Player, String>> columns = new ArrayList<>();
+        DefaultDataTable<Player, String> playerTable;
 
-        columns.add(new PropertyColumn<Player, String>(Model.of("Player"), "name"));
-        DefaultDataTable<Player, String> playerTable = new DefaultDataTable<Player, String>("players", columns, new PlayerListProvider(gameState), Integer.MAX_VALUE);
+        columns.add(new PropertyColumn<>(Model.of("Player"), "name"));
+        columns.add(new PropertyColumn<>(Model.of("Score"), "score"));
+        playerTable = new DefaultDataTable<>("players", columns, new PlayerListProvider(gameState), Integer.MAX_VALUE);
         add(playerTable);
+
         Form form = new Form("form");
         AjaxButton launchButton = new AjaxButton("launchBtn") {
 
@@ -37,11 +40,8 @@ public class LobbyPanel extends Panel {
                 GameLogic.launchGame(gameState.getObject());
 
             }
-
         };
         add(form);
         form.add(launchButton);
     }
-
-
 }
