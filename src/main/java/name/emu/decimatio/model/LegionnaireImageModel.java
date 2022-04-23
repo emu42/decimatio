@@ -33,13 +33,26 @@ public class LegionnaireImageModel implements IModel<ResourceReference> {
                 numPart = "01";
             }
 
-            if (GameSessionSingleton.getTheSingleton().getGameState().getStatus() == GameStatus.MOVING || isPlayerCharacter) {
+            GameStatus status = GameSessionSingleton.getTheSingleton().getGameState().getStatus();
+            if (status == GameStatus.MOVING || isPlayerCharacter) {
                 switch (legionnaire.getUpcomingMove()) {
                     case PUSH_LEFT:
                         action = "pushleft";
                         break;
                     case PUSH_RIGHT:
                         action = "pushright";
+                        break;
+                    default:
+                        action = "idle";
+                        break;
+                }
+            } else if (status == GameStatus.ENDROUND || status == GameStatus.SCORE) {
+                switch (legionnaire.getUpcomingMove()) {
+                    case BEING_STABBED:
+                        action = "dead";
+                        break;
+                    case DEAD:
+                        action = "dead";
                         break;
                     default:
                         action = "idle";

@@ -9,5 +9,7 @@ public enum GameStatus {
 
     ENDROUND,
 
+    SCORE,
+
     FINISHED
 }

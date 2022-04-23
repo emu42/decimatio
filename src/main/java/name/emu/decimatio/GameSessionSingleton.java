@@ -19,6 +19,7 @@ public class GameSessionSingleton {
         return GameState.builder()
             .status(GameStatus.LOBBY)
             .tenthSlotPos(5)
+            .commanderPos(9)
             .legionnaires(new ArrayList<>())
             .players(new ArrayList<>())
             .build();

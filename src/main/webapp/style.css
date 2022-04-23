@@ -96,3 +96,11 @@ h3 {
 		color: #FF5500;
 	}
 }
+.commander {
+	position: absolute;
+	top: 550px;
+	z-index: 100;
+}
+.legionnaire {
+	padding-bottom: 50px;
+}

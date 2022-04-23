@@ -5,5 +5,9 @@ public enum Move {
 
     PUSH_LEFT,
 
-    PUSH_RIGHT
+    PUSH_RIGHT,
+
+    BEING_STABBED,
+
+    DEAD
 }

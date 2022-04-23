@@ -10,6 +10,7 @@ import name.emu.decimatio.model.Move;
 import name.emu.decimatio.model.Player;
 import name.emu.decimatio.timer.PerformTurnTimerTask;
 import name.emu.decimatio.timer.ShowMoveTimerTask;
+import name.emu.decimatio.timer.ShowScoreTimerTask;
 
 public class GameLogic {
 
@@ -62,6 +63,15 @@ public class GameLogic {
         TIMER.schedule(new PerformTurnTimerTask(gameState), MOVE_TIME_MILLIS);
     }
 
+    public static void showScore(GameState gameState) {
+        gameState.setStatus(GameStatus.SCORE);
+
+        Legionnaire decimated = gameState.getLegionnaires().get(gameState.getTenthSlotPos()-1);
+        decimated.setUpcomingMove(Move.DEAD);
+
+        incrementVersion(gameState);
+    }
+
     public static void performTurn(GameState gameState) {
         int moveVector = 0;
 
@@ -87,8 +97,26 @@ public class GameLogic {
         gameState.setStatus(GameStatus.INPUT);
         incrementVersion(gameState);
 
-        // schedule next update
-        TIMER.schedule(new ShowMoveTimerTask(gameState), INPUT_TIME_MILLIS);
+        commanderMove(gameState);
+
+        if (gameState.getStatus() == GameStatus.INPUT) {   // may be overruled by commander
+            // schedule next update
+            TIMER.schedule(new ShowMoveTimerTask(gameState), INPUT_TIME_MILLIS);
+        } else {
+            TIMER.schedule(new ShowScoreTimerTask(gameState), MOVE_TIME_MILLIS);
+        }
+    }
+
+    private static void commanderMove(final GameState gameState) {
+
+        if (gameState.getCommanderPos() == gameState.getTenthSlotPos() - 1) {
+            // execution
+            gameState.setStatus(GameStatus.ENDROUND);
+
+        } else {
+            // move on
+            gameState.setCommanderPos(gameState.getCommanderPos()-1);
+        }
     }
 
     private static void incrementVersion(final GameState gameState) {

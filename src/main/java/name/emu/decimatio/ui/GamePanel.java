@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import name.emu.decimatio.GameSessionSingleton;
+import name.emu.decimatio.model.CommanderImageModel;
+import name.emu.decimatio.model.CommanderPositionModel;
 import name.emu.decimatio.model.GameState;
 import name.emu.decimatio.model.Legionnaire;
 import name.emu.decimatio.model.LegionnaireImageModel;
@@ -58,6 +60,7 @@ public class GamePanel extends Panel {
         for (int i=0; i<10; i++) {
             WebMarkupContainer container = new WebMarkupContainer(legionnaireImageRow.newChildId());
             container.add(new CachingImage("legionnaireImage", new LegionnaireImageModel(new LegionnairePositionModel(gameState, i))));
+            container.add(new CachingImage("commanderImage", new CommanderImageModel(new CommanderPositionModel(gameState, i))));
             legionnaireImageRow.add(container);
 
             IModel<Legionnaire> legionnairePositionModel = new LegionnairePositionModel(gameState, i);
