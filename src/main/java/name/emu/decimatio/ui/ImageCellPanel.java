@@ -1,4 +1,4 @@
-package name.emu.decimatio;
+package name.emu.decimatio.ui;
 
 import org.apache.wicket.markup.html.panel.Panel;
 

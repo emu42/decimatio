@@ -1,5 +1,6 @@
 package name.emu.decimatio;
 
+import name.emu.decimatio.ui.HomePage;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

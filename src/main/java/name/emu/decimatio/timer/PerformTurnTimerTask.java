@@ -1,6 +1,8 @@
-package name.emu.decimatio;
+package name.emu.decimatio.timer;
 
 import java.util.TimerTask;
+import name.emu.decimatio.GameLogic;
+import name.emu.decimatio.model.GameState;
 
 public class PerformTurnTimerTask extends TimerTask {
 

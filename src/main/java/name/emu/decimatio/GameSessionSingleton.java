@@ -3,6 +3,9 @@ package name.emu.decimatio;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import name.emu.decimatio.model.GameState;
+import name.emu.decimatio.model.GameStatus;
+import name.emu.decimatio.model.Player;
 
 public class GameSessionSingleton {
 

@@ -1,4 +1,4 @@
-package name.emu.decimatio;
+package name.emu.decimatio.model;
 
 import java.util.List;
 import org.apache.wicket.model.IModel;

@@ -1,5 +1,6 @@
 package name.emu.decimatio;
 
+import name.emu.decimatio.ui.HomePage;
 import org.apache.wicket.csp.CSPDirective;
 import org.apache.wicket.csp.CSPDirectiveSrcValue;
 import org.apache.wicket.markup.html.WebPage;

@@ -1,7 +1,11 @@
-package name.emu.decimatio;
+package name.emu.decimatio.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import name.emu.decimatio.GameLogic;
+import name.emu.decimatio.model.GameState;
+import name.emu.decimatio.model.Player;
+import name.emu.decimatio.model.PlayerListProvider;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
@@ -9,7 +13,6 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 

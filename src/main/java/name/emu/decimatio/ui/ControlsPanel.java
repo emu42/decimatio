@@ -1,5 +1,7 @@
-package name.emu.decimatio;
+package name.emu.decimatio.ui;
 
+import name.emu.decimatio.model.Legionnaire;
+import name.emu.decimatio.model.Move;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;

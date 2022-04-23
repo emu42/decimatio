@@ -1,7 +1,12 @@
-package name.emu.decimatio;
+package name.emu.decimatio.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import name.emu.decimatio.model.GameState;
+import name.emu.decimatio.model.Legionnaire;
+import name.emu.decimatio.model.LegionnaireImageModel;
+import name.emu.decimatio.model.LegionnairePositionModel;
+import name.emu.decimatio.model.PlayerLegionnaireModel;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;

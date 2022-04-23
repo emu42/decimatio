@@ -1,4 +1,4 @@
-package name.emu.decimatio;
+package name.emu.decimatio.model;
 
 public enum GameStatus {
     LOBBY,

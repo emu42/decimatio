@@ -1,5 +1,10 @@
-package name.emu.decimatio;
+package name.emu.decimatio.ui;
 
+import name.emu.decimatio.GameLogic;
+import name.emu.decimatio.GameSessionSingleton;
+import name.emu.decimatio.model.GameState;
+import name.emu.decimatio.model.GameStateModel;
+import name.emu.decimatio.model.Player;
 import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.model.IModel;

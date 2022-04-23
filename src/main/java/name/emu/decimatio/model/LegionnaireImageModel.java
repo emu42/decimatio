@@ -1,5 +1,7 @@
-package name.emu.decimatio;
+package name.emu.decimatio.model;
 
+import name.emu.decimatio.GameSessionSingleton;
+import name.emu.decimatio.ui.GamePanel;
 import org.apache.wicket.Session;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.PackageResourceReference;

@@ -1,7 +1,6 @@
-package name.emu.decimatio;
+package name.emu.decimatio.model;
 
 import java.util.Iterator;
-import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
