@@ -25,7 +25,7 @@ public class GamePanel extends Panel {
 
         for (int i=0; i<10; i++) {
             WebMarkupContainer container = new WebMarkupContainer(legionnaireImageRow.newChildId());
-            container.add(new Image("legionnaireImage", "imgs/legionaire01_idle.png"));
+            container.add(new Image("legionnaireImage", new LegionnaireImageModel(new LegionnairePositionModel(gameState, i))));
             legionnaireImageRow.add(container);
 
             IModel<Legionnaire> legionairePositionModel = new LegionnairePositionModel(gameState, i);
