@@ -1,5 +1,7 @@
 package name.emu.decimatio;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
@@ -12,24 +14,26 @@ public class GamePanel extends Panel {
 
     private IModel<GameState> gameState;
 
+    private List<WebMarkupContainer> imgContainers = new ArrayList<>();
+
     public GamePanel(final String id, IModel<GameState> gameState) {
         super(id, gameState);
         this.gameState = gameState;
 
-        RepeatingView legionaireImageRow = new RepeatingView("imageRow");
-        for (Legionaire legionaire: gameState.getObject().getLegionaires()) {
-            WebMarkupContainer container = new WebMarkupContainer(legionaireImageRow.newChildId());
-            container.add(new Image("legionaireImage", "imgs/legionaire01_idle.png"));
-            legionaireImageRow.add(container);
-        }
-        add(legionaireImageRow);
-        RepeatingView legionaireNameRow = new RepeatingView("nameRow");
-        int i=0;
-        for (Legionaire legionaire: gameState.getObject().getLegionaires()) {
-            IModel<Legionaire> legionairePositionModel = new LegionairePositionModel(gameState, i);
-            legionaireNameRow.add(new Label(legionaireNameRow.newChildId(), new PropertyModel(legionairePositionModel, "name")));
+        RepeatingView legionnaireImageRow = new RepeatingView("imageRow");
+        RepeatingView legionnaireNameRow = new RepeatingView("nameRow");
+
+        for (int i=0; i<10; i++) {
+            WebMarkupContainer container = new WebMarkupContainer(legionnaireImageRow.newChildId());
+            container.add(new Image("legionnaireImage", "imgs/legionaire01_idle.png"));
+            legionnaireImageRow.add(container);
+
+            IModel<Legionnaire> legionairePositionModel = new LegionnairePositionModel(gameState, i);
+            legionnaireNameRow.add(new Label(legionnaireNameRow.newChildId(), new PropertyModel(legionairePositionModel, "name")));
             i++;
         }
-        add(legionaireNameRow);
+
+        add(legionnaireImageRow);
+        add(legionnaireNameRow);
     }
 }

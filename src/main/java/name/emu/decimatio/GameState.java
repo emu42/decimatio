@@ -8,5 +8,14 @@ import lombok.Data;
 @Data
 @Builder
 public class GameState implements Serializable {
-    private List<Legionaire> legionaires;
+
+    private GameStatus status;
+
+    private List<Player> players;
+
+    private List<Legionnaire> legionnaires;
+
+    private int tenthSlotPos;
+
+    private int commanderPos;
 }

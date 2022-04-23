@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Legionaire implements Serializable {
+public class Legionnaire implements Serializable {
 
     private boolean playerCharacter;
 
     private String name;
 
-    private Legionaire nemesis;
+    private Legionnaire nemesis;
 
     private Move upcomingMove;
 }
