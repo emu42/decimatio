@@ -15,14 +15,20 @@ public class GameLogic {
 
     public static final int INPUT_TIME_MILLIS = 5000;
 
-    public static final int MOVE_TIME_MILLIS = 5000;
+    public static final int MOVE_TIME_MILLIS = 2000;
 
     private static Timer TIMER = new Timer();
 
-    public static synchronized void addPlayer(GameState gameState, Player player) {
+    public static synchronized String addPlayer(GameState gameState, Player player) {
+        String error = null;
         if (!gameState.getPlayers().contains(player)) {
-            gameState.getPlayers().add(player);
+            if (gameState.getPlayers().size() <= 10) {
+                gameState.getPlayers().add(player);
+            } else {
+                error = "Game session already full.";
+            }
         }
+        return error;
     }
 
     public static void launchGame(GameState gameState) {
@@ -44,11 +50,15 @@ public class GameLogic {
         Collections.shuffle(legionnaireList);
         gameState.setStatus(GameStatus.INPUT);
 
+        incrementVersion(gameState);
+
         TIMER.schedule(new PerformTurnTimerTask(gameState), INPUT_TIME_MILLIS);
     }
 
     public static void showMove(GameState gameState) {
         gameState.setStatus(GameStatus.MOVING);
+        incrementVersion(gameState);
+
         TIMER.schedule(new PerformTurnTimerTask(gameState), MOVE_TIME_MILLIS);
     }
 
@@ -74,8 +84,15 @@ public class GameLogic {
             legionnaire.setUpcomingMove(Move.NONE);
         }
 
+        gameState.setStatus(GameStatus.INPUT);
+        incrementVersion(gameState);
+
         // schedule next update
         TIMER.schedule(new ShowMoveTimerTask(gameState), INPUT_TIME_MILLIS);
+    }
+
+    private static void incrementVersion(final GameState gameState) {
+        gameState.setVersion(gameState.getVersion() + 1);
     }
 
     private static void shiftPositions(final List<Legionnaire> legionnaires, int moveVector) {

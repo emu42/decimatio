@@ -75,3 +75,24 @@ h3 {
 .filler {
   flex-grow: 1;
 }
+.numeral {
+#	background-color: aqua;
+	font-size: 40pt;
+	font-family: "Nimbus Roman";
+	text-align: center;
+	font-weight: bold;
+}
+.decimatio {
+	animation: animate 1.5s linear infinite;
+}
+@keyframes animate{
+	0%{
+		color: #FF5500;
+	}
+	50%{
+		color: #ffffff;
+	}
+	100%{
+		color: #FF5500;
+	}
+}

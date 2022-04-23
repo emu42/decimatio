@@ -20,7 +20,11 @@ public class HomePage extends WebPage {
 		Session.get().bind();
 		String sessionId = Session.get().getId();
 		Player player = GameSessionSingleton.findOrCreateForSessionId(sessionId);
-		GameLogic.addPlayer(gameState.getObject(), player);
+		String error = GameLogic.addPlayer(gameState.getObject(), player);
+
+		if (error != null) {
+			System.err.println(error);
+		}
 
 		add(new LobbyPanel("lobbyPanel", gameState));
 		add(new GamePanel("gamePanel", gameState));

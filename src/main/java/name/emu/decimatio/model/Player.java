@@ -12,4 +12,6 @@ public class Player implements Serializable {
     private String name;
 
     private Legionnaire character;
+
+    private int lastGameStateVersionRendered;
 }
