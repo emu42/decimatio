@@ -32,6 +32,37 @@ public class GameLogic {
     }
 
     public static void performTurn(GameState gameState) {
+        int moveVector = 0;
 
+        for (Legionnaire legionnaire : gameState.getLegionnaires()) {
+            switch (legionnaire.getUpcomingMove()) {
+                case PUSH_LEFT:
+                    moveVector--;
+                    break;
+                case PUSH_RIGHT:
+                    moveVector++;
+                    break;
+                case NONE:
+                    break;
+            }
+        }
+
+        shiftPositions(gameState.getLegionnaires(), moveVector);
+
+        for (Legionnaire legionnaire : gameState.getLegionnaires()) {
+            legionnaire.setUpcomingMove(Move.NONE);
+        }
+    }
+
+    private static void shiftPositions(final List<Legionnaire> legionnaires, int moveVector) {
+        while (moveVector < 0) {
+            legionnaires.add(legionnaires.get(0));
+            moveVector++;
+        }
+
+        while (moveVector > 0) {
+            legionnaires.add(0, legionnaires.get(legionnaires.size()-1));
+            moveVector--;
+        }
     }
 }

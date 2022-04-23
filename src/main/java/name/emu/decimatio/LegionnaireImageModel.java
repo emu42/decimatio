@@ -2,9 +2,6 @@ package name.emu.decimatio;
 
 import org.apache.wicket.Session;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.request.resource.ContextRelativeResource;
-import org.apache.wicket.request.resource.ContextRelativeResourceReference;
-import org.apache.wicket.request.resource.IResource;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 

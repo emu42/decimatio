@@ -34,5 +34,6 @@ public class GamePanel extends Panel {
 
         add(legionnaireImageRow);
         add(legionnaireNameRow);
+        add(new ControlsPanel("controls", new PlayerLegionnaireModel()));
     }
 }
