@@ -66,3 +66,12 @@ h3 {
 	font-size:24pt;
 	color:#092E67;
 }
+.gamePanel {
+	display: flex;
+	height: 1080px;
+	background-image: url('background.jpg');
+	flex-direction: column;
+}
+.filler {
+  flex-grow: 1;
+}

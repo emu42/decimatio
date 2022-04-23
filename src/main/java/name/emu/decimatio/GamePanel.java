@@ -30,7 +30,6 @@ public class GamePanel extends Panel {
 
             IModel<Legionnaire> legionairePositionModel = new LegionnairePositionModel(gameState, i);
             legionnaireNameRow.add(new Label(legionnaireNameRow.newChildId(), new PropertyModel(legionairePositionModel, "name")));
-            i++;
         }
 
         add(legionnaireImageRow);
