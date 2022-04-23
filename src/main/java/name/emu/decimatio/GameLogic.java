@@ -1,5 +1,6 @@
 package name.emu.decimatio;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
@@ -31,21 +32,38 @@ public class GameLogic {
         }
         return error;
     }
-
     public static void launchGame(GameState gameState) {
         List<Legionnaire> legionnaireList = gameState.getLegionnaires();
+        if (gameState.getStatus() == GameStatus.LOBBY) {
 
-        // create player characters
-        for (Player player: gameState.getPlayers()) {
-            Legionnaire legionnaire = Legionnaire.builder().playerCharacter(true).name(player.getName()).upcomingMove(Move.NONE).build();
-            player.setCharacter(legionnaire);
-            legionnaireList.add(legionnaire);
-        }
+            // create player characters
+            for (Player player : gameState.getPlayers()) {
+                Legionnaire legionnaire = Legionnaire.builder().playerCharacter(true).name(player.getName()).upcomingMove(Move.NONE).build();
+                player.setCharacter(legionnaire);
+                legionnaireList.add(legionnaire);
+            }
 
-        // create AI characters
-        while (legionnaireList.size()<10) {
-            Legionnaire legionnaire = Legionnaire.builder().playerCharacter(false).name("L"+legionnaireList.size()).upcomingMove(Move.NONE).build();
-            legionnaireList.add(legionnaire);
+            // randomly assign nemesisss..s?
+            if (gameState.getPlayers().size() >= 2) {
+                List<Player> nemesisAssignmentList = new ArrayList<>(gameState.getPlayers());
+                Collections.shuffle(nemesisAssignmentList);
+
+                for (int i = 0; i < nemesisAssignmentList.size() - 1; i++) {
+                    nemesisAssignmentList.get(i).getCharacter().setNemesis(nemesisAssignmentList.get(i + 1).getCharacter());
+                }
+                nemesisAssignmentList.get(nemesisAssignmentList.size() - 1).getCharacter().setNemesis(nemesisAssignmentList.get(0).getCharacter());
+            }
+
+            // create AI characters
+            while (legionnaireList.size() < 10) {
+                Legionnaire legionnaire = Legionnaire.builder().playerCharacter(false).name("L" + legionnaireList.size()).upcomingMove(Move.NONE).build();
+                legionnaireList.add(legionnaire);
+            }
+        } else {
+            // RELAUNCH
+            // reset everything but nemesises and score
+            gameState.getLegionnaires().forEach(legionnaire -> legionnaire.setUpcomingMove(Move.NONE));
+            gameState.setCommanderPos(9);
         }
 
         Collections.shuffle(legionnaireList);
