@@ -154,3 +154,11 @@ body {
 	padding: 10px;
 	font-size: 40px;
 }
+.introlink {
+	margin: 20px;
+	position: fixed;
+	z-index:50;
+	font-size: 15pt;
+	right:0;
+	top:0;
+}
