@@ -162,3 +162,20 @@ body {
 	right:0;
 	top:0;
 }
+.story p, .story li {
+	font-size: 32pt;
+
+}
+body.story {
+	margin-top: 20px;
+	font-size: 40px;
+	max-width: 40em;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #c0e0ff;
+}
+.story h1 {
+	text-align: center;
+	clear: both;
+}
+
