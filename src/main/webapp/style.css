@@ -66,15 +66,40 @@ h3 {
 	font-size:24pt;
 	color:#092E67;
 }
+.fullscreen {
+	min-width: 1800px;
+	max-width: 1920px;
+	background-size: cover;
+}
+
 .gamePanel {
 	display: flex;
-	height: 1080px;
 	background-image: url('background.jpg');
 	flex-direction: column;
 }
-.filler {
+
+.gamePanel .filler {
   flex-grow: 1;
 }
+.signUpPanel {
+	display: flex;
+	flex-direction: column;
+	height: 960px;
+	background-image: url('title_screen.png');
+}
+.signUpPanel form{
+	text-align: center;
+	background-color: #FF9977A0;
+	padding-top:10px;
+	padding-bottom: 10px;
+}
+.signUpPanel .filler1{
+	flex-grow: 5;
+}
+.signUpPanel .filler2{
+	flex-grow: 1;
+}
+
 .numeral {
 #	background-color: aqua;
 	font-size: 40pt;

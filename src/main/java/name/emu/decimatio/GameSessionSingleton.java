@@ -2,6 +2,7 @@ package name.emu.decimatio;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import name.emu.decimatio.model.GameState;
 import name.emu.decimatio.model.GameStatus;
@@ -35,7 +36,7 @@ public class GameSessionSingleton {
 
     public synchronized static Player findOrCreateForSessionId(String sessionId) {
         if (!sessionToPlayerMap.containsKey(sessionId)) {
-            Player player = Player.builder().name(sessionId).build();
+            Player player = Player.builder().name(null).build();
             sessionToPlayerMap.put(sessionId, player);
         }
         return sessionToPlayerMap.get(sessionId);

@@ -7,6 +7,7 @@ import name.emu.decimatio.GameSessionSingleton;
 import name.emu.decimatio.model.CommanderImageModel;
 import name.emu.decimatio.model.CommanderPositionModel;
 import name.emu.decimatio.model.GameState;
+import name.emu.decimatio.model.GameStatus;
 import name.emu.decimatio.model.Legionnaire;
 import name.emu.decimatio.model.LegionnaireImageModel;
 import name.emu.decimatio.model.LegionnairePositionModel;
@@ -24,6 +25,7 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.util.string.Strings;
 
 public class GamePanel extends Panel {
 
@@ -39,23 +41,7 @@ public class GamePanel extends Panel {
         RepeatingView legionnaireNameRow = new RepeatingView("nameRow");
         RepeatingView numeralRow = new RepeatingView("numeralRow");
 
-        setOutputMarkupId(true);
-        Label updater = new Label("updater", "");
-        updater.add(new AjaxSelfUpdatingTimerBehavior(Duration.ofSeconds(1)) {
-            @Override
-            protected void onPostProcessTarget(final AjaxRequestTarget target) {
-                super.onPostProcessTarget(target);
-
-                Player player = GameSessionSingleton.findOrCreateForSessionId(Session.get().getId());
-                GameState gameState = GameSessionSingleton.getTheSingleton().getGameState();
-                if (player != null && player.getLastGameStateVersionRendered() != gameState.getVersion()) {
-                    target.add(GamePanel.this);
-                    player.setLastGameStateVersionRendered(gameState.getVersion());
-                }
-
-            }
-        });
-        add(updater);
+        this.setOutputMarkupPlaceholderTag(true);
 
         for (int i=0; i<10; i++) {
             WebMarkupContainer container = new WebMarkupContainer(legionnaireImageRow.newChildId());
@@ -118,5 +104,12 @@ public class GamePanel extends Panel {
                 str = null;
         }
         return str;
+    }
+
+
+    @Override
+    protected void onConfigure() {
+        super.onConfigure();
+        setVisible(gameState.getObject().getStatus() == GameStatus.INPUT || gameState.getObject().getStatus() == GameStatus.ENDROUND);
     }
 }
