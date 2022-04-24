@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
+import java.util.TimerTask;
 import name.emu.decimatio.model.GameState;
 import name.emu.decimatio.model.GameStatus;
 import name.emu.decimatio.model.Legionnaire;
@@ -71,14 +72,18 @@ public class GameLogic {
 
         incrementVersion(gameState);
 
-        TIMER.schedule(new PerformTurnTimerTask(gameState), INPUT_TIME_MILLIS);
+        schedule(new PerformTurnTimerTask(gameState), INPUT_TIME_MILLIS);
+    }
+
+    private static void schedule(final TimerTask timerTask, final int millis) {
+        TIMER.schedule(timerTask, millis);
     }
 
     public static void showMove(GameState gameState) {
         gameState.setStatus(GameStatus.MOVING);
         incrementVersion(gameState);
 
-        TIMER.schedule(new PerformTurnTimerTask(gameState), MOVE_TIME_MILLIS);
+        schedule(new PerformTurnTimerTask(gameState), MOVE_TIME_MILLIS);
     }
 
     public static void showScore(GameState gameState) {
@@ -97,7 +102,7 @@ public class GameLogic {
             if (player.getCharacter().getUpcomingMove() != Move.DEAD) {
                 player.setScore(player.getScore() + 10);
             }
-            if (player.getCharacter().getNemesis().getUpcomingMove() == Move.DEAD) {
+            if (player.getCharacter().getNemesis()!=null && player.getCharacter().getNemesis().getUpcomingMove() == Move.DEAD) {
                 player.setScore(player.getScore() + 20);
             }
         }
@@ -132,9 +137,9 @@ public class GameLogic {
 
         if (gameState.getStatus() == GameStatus.INPUT) {   // may be overruled by commander
             // schedule next update
-            TIMER.schedule(new ShowMoveTimerTask(gameState), INPUT_TIME_MILLIS);
+            schedule(new ShowMoveTimerTask(gameState), INPUT_TIME_MILLIS);
         } else {
-            TIMER.schedule(new ShowScoreTimerTask(gameState), MOVE_TIME_MILLIS);
+            schedule(new ShowScoreTimerTask(gameState), MOVE_TIME_MILLIS);
         }
     }
 

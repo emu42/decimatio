@@ -1,6 +1,5 @@
 package name.emu.decimatio.model;
 
-import java.util.List;
 import org.apache.wicket.model.IModel;
 
 public class CommanderPositionModel implements IModel<Commander> {
@@ -21,6 +20,8 @@ public class CommanderPositionModel implements IModel<Commander> {
         } else if (gameState.getObject().getStatus() == GameStatus.ENDROUND) {
             commander = Commander.builder().status(CommanderStatus.STABBING).build();
         } else if (gameState.getObject().getStatus() == GameStatus.SCORE) {
+            commander = Commander.builder().status(CommanderStatus.FACING_TROOPS).build();
+        } else if (gameState.getObject().getStatus() == GameStatus.INPUT) {
             commander = Commander.builder().status(CommanderStatus.FACING_TROOPS).build();
         } else {
             commander = Commander.builder().status(CommanderStatus.FACING_AWAY).build();

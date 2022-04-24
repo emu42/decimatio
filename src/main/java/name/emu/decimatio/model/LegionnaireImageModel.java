@@ -49,7 +49,7 @@ public class LegionnaireImageModel implements IModel<ResourceReference> {
             } else if (status == GameStatus.ENDROUND || status == GameStatus.SCORE) {
                 switch (legionnaire.getUpcomingMove()) {
                     case BEING_STABBED:
-                        action = "dead";
+                        action = "stabbed";
                         break;
                     case DEAD:
                         action = "dead";

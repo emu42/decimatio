@@ -70,12 +70,14 @@ h3 {
 	min-width: 1800px;
 	max-width: 1920px;
 	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .gamePanel {
 	display: flex;
 	background-image: url('background.jpg');
 	flex-direction: column;
+	height: 1080px;
 }
 
 .gamePanel .filler {
@@ -93,6 +95,10 @@ h3 {
 	padding-top:10px;
 	padding-bottom: 10px;
 }
+.signUpPanel .inquiry {
+	font-style: oblique;
+	font-size: 20pt;
+}
 .signUpPanel .filler1{
 	flex-grow: 7;
 }
@@ -101,11 +107,17 @@ h3 {
 }
 
 .numeral {
-#	background-color: aqua;
 	font-size: 40pt;
-	font-family: "Nimbus Roman";
 	text-align: center;
 	font-weight: bold;
+}
+.playername {
+	font-size: 20pt;
+	text-align: center;
+	font-weight: bold;
+}
+.commander, .legionnaire {
+	text-align: center;
 }
 .decimatio {
 	animation: animate 1.5s linear infinite;
@@ -128,4 +140,7 @@ h3 {
 }
 .legionnaire {
 	padding-bottom: 50px;
+}
+body {
+	font-family: "Nimbus Roman";
 }

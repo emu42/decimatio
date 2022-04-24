@@ -18,13 +18,13 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 public class HomePage extends WebPage implements GlobalRefreshCallback {
 	private static final long serialVersionUID = 1L;
 
-	private IModel<String> playerName;
+	private final IModel<String> playerName;
 
-	private GamePanel gamePanel;
+	private final GamePanel gamePanel;
 
-	private LobbyPanel lobbyPanel;
+	private final LobbyPanel lobbyPanel;
 
-	private SignUpPanel signUpPanel;
+	private final SignUpPanel signUpPanel;
 
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
@@ -35,7 +35,7 @@ public class HomePage extends WebPage implements GlobalRefreshCallback {
 		Player player = GameSessionSingleton.findOrCreateForSessionId(sessionId);
 		String error = GameLogic.addPlayer(gameState.getObject(), player);
 
-		playerName = new PropertyModel(player, "name");
+		playerName = new PropertyModel<>(player, "name");
 
 		if (error != null) {
 			System.err.println(error);
@@ -54,6 +54,7 @@ public class HomePage extends WebPage implements GlobalRefreshCallback {
 				Player player = GameSessionSingleton.findOrCreateForSessionId(Session.get().getId());
 				GameState gameState = GameSessionSingleton.getTheSingleton().getGameState();
 				if (player != null && gameState!=null && player.getLastGameStateVersionRendered() != gameState.getVersion()) {
+					System.out.println("state change");
 					player.setLastGameStateVersionRendered(gameState.getVersion());
 					globalRefresh(target);
 				}
