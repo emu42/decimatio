@@ -162,7 +162,8 @@ public class GameLogic {
         if (gameState.getCommanderPos() == gameState.getTenthSlotPos() - 1) {
             // execution
             gameState.setStatus(GameStatus.ENDROUND);
-
+            Legionnaire decimated = gameState.getLegionnaires().get(gameState.getTenthSlotPos()-1);
+            decimated.setUpcomingMove(Move.BEING_STABBED);
         } else {
             // move on
             gameState.setCommanderPos(gameState.getCommanderPos()-1);

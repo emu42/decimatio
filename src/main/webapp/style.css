@@ -68,7 +68,7 @@ h3 {
 }
 .fullscreen {
 	min-width: 1800px;
-	max-width: 1920px;
+	max-width: 2400px;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -114,10 +114,12 @@ h3 {
 .playername {
 	font-size: 20pt;
 	text-align: center;
+	background-color: #6493D220;
 	font-weight: bold;
 }
 .commander, .legionnaire {
 	text-align: center;
+	width:210px;
 }
 .decimatio {
 	animation: animate 1.5s linear infinite;
@@ -135,7 +137,7 @@ h3 {
 }
 .commander {
 	position: absolute;
-	top: 550px;
+	top: 600px;
 	z-index: 100;
 }
 .legionnaire {
