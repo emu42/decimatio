@@ -21,7 +21,7 @@ public class PlayerListProvider extends SortableDataProvider<Player, String> {
 
     @Override
     public long size() {
-        return gameState.getObject().getPlayers().size();
+        return gameState.getObject()!=null ? gameState.getObject().getPlayers().size() : 0;
     }
 
     @Override

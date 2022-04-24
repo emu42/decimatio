@@ -1,6 +1,14 @@
 <wicket:panel>
-  <table wicket:id="players"/>
-  <form wicket:id="form">
-    <input type="submit" value="Start Game" wicket:id="launchBtn"/>
-  </form>
+  <div wicket:id="setupContainer">
+    <form wicket:id="form">
+    <input type="button" wicket:id="createGameBtn"/>
+    </form>
+  </div>
+  <div wicket:id="playerListContainer">
+    <input type="text" wicket:id="joinLink"/>
+    <table wicket:id="players"/>
+    <form wicket:id="form">
+      <input type="submit" value="Start Game" wicket:id="launchBtn"/>
+    </form>
+  </div>
 </wicket:panel>

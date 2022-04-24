@@ -6,6 +6,7 @@ import name.emu.decimatio.GameSessionSingleton;
 import name.emu.decimatio.model.GameState;
 import name.emu.decimatio.model.GameStateModel;
 import name.emu.decimatio.model.Player;
+import name.emu.decimatio.model.PlayerModel;
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
@@ -16,6 +17,9 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class HomePage extends WebPage implements GlobalRefreshCallback {
+
+	public static final String GAME_SESSION_PARAM = "session";
+
 	private static final long serialVersionUID = 1L;
 
 	private final IModel<String> playerName;
@@ -30,19 +34,17 @@ public class HomePage extends WebPage implements GlobalRefreshCallback {
 		super(parameters);
 		IModel<GameState> gameState = new GameStateModel();
 
+		String gameSessionId = parameters.get(GAME_SESSION_PARAM).toOptionalString();
 		Session.get().bind();
 		String sessionId = Session.get().getId();
 		Player player = GameSessionSingleton.findOrCreateForSessionId(sessionId);
-		String error = GameLogic.addPlayer(gameState.getObject(), player);
-
+		//String error = GameLogic.addPlayer(gameState.getObject(), player);
+		IModel<Player> playerModel = new PlayerModel();
+		player.setGameSessionId(gameSessionId);
 		playerName = new PropertyModel<>(player, "name");
 
-		if (error != null) {
-			System.err.println(error);
-		}
-
-		signUpPanel = new SignUpPanel("signUpPanel", gameState, playerName, this);
-		lobbyPanel = new LobbyPanel("lobbyPanel", gameState, playerName, this);
+		signUpPanel = new SignUpPanel("signUpPanel", gameState, playerModel, this);
+		lobbyPanel = new LobbyPanel("lobbyPanel", gameState, playerModel, this);
 		gamePanel = new GamePanel("gamePanel", gameState, this);
 
 		Label updater = new Label("updater", "");
@@ -52,7 +54,7 @@ public class HomePage extends WebPage implements GlobalRefreshCallback {
 				super.onPostProcessTarget(target);
 
 				Player player = GameSessionSingleton.findOrCreateForSessionId(Session.get().getId());
-				GameState gameState = GameSessionSingleton.getTheSingleton().getGameState();
+				GameState gameState = GameSessionSingleton.findForGameSessionId(player.getGameSessionId());
 				if (player != null && gameState!=null && player.getLastGameStateVersionRendered() != gameState.getVersion()) {
 					System.out.println("state change");
 					player.setLastGameStateVersionRendered(gameState.getVersion());

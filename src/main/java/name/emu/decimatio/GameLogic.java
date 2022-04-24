@@ -22,6 +22,18 @@ public class GameLogic {
 
     private static Timer TIMER = new Timer();
 
+    public static synchronized boolean addPlayer(Player player) {
+        boolean success = false;
+        String gameSessionId = player.getGameSessionId();
+        GameState gameState = GameSessionSingleton.findForGameSessionId(gameSessionId);
+
+        if (gameState != null && gameState.getPlayers().size() < 10) {
+            success = addPlayer(gameState, player) == null;
+        }
+
+        return success;
+    }
+
     public static synchronized String addPlayer(GameState gameState, Player player) {
         String error = null;
         if (!gameState.getPlayers().contains(player)) {

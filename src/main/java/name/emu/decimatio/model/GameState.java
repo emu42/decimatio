@@ -9,6 +9,8 @@ import lombok.Data;
 @Builder
 public class GameState implements Serializable {
 
+    private String gameSessionId;
+
     private int version;
 
     private GameStatus status;

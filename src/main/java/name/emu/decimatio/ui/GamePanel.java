@@ -1,9 +1,7 @@
 package name.emu.decimatio.ui;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import name.emu.decimatio.GameSessionSingleton;
 import name.emu.decimatio.model.CommanderImageModel;
 import name.emu.decimatio.model.CommanderPositionModel;
 import name.emu.decimatio.model.GameState;
@@ -11,21 +9,14 @@ import name.emu.decimatio.model.GameStatus;
 import name.emu.decimatio.model.Legionnaire;
 import name.emu.decimatio.model.LegionnaireImageModel;
 import name.emu.decimatio.model.LegionnairePositionModel;
-import name.emu.decimatio.model.Player;
 import name.emu.decimatio.model.PlayerLegionnaireModel;
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.Session;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.util.string.Strings;
 
 public class GamePanel extends Panel {
 
@@ -54,11 +45,9 @@ public class GamePanel extends Panel {
             IModel<Legionnaire> legionnairePositionModel = new LegionnairePositionModel(gameState, i);
             legionnaireNameRow.add(new Label(legionnaireNameRow.newChildId(), new PropertyModel(legionnairePositionModel, "name")));
 
-            int posNum = (10 + i - (gameState.getObject().getTenthSlotPos())+1) % 10;
-            Label posLabel = new Label(numeralRow.newChildId(), Model.of(toRomanNumeral(posNum)));
-            if (posNum == 0) {
-                posLabel.add(new AttributeModifier("class", "numeral decimatio"));
-            }
+            IModel<String> posLabelModel = new PosNumeralModel(gameState, i);
+            Label posLabel = new Label(numeralRow.newChildId(), posLabelModel);
+            posLabel.add(new AttributeModifier("class", new NumeralCssClassModel(gameState, i)));
             numeralRow.add(posLabel);
         }
 
@@ -68,50 +57,11 @@ public class GamePanel extends Panel {
         add(numeralRow);
     }
 
-    private String toRomanNumeral(final int posNum) {
-        String str;
-
-        switch (posNum) {
-            case 0:
-                str = "X";
-                break;
-            case 1:
-                str = "I";
-                break;
-            case 2:
-                str = "II";
-                break;
-            case 3:
-                str = "III";
-                break;
-            case 4:
-                str = "IV";
-                break;
-            case 5:
-                str = "V";
-                break;
-            case 6:
-                str = "VI";
-                break;
-            case 7:
-                str = "VII";
-                break;
-            case 8:
-                str = "VIII";
-                break;
-            case 9:
-                str = "IX";
-                break;
-            default:
-                str = null;
-        }
-        return str;
-    }
 
 
     @Override
     protected void onConfigure() {
         super.onConfigure();
-        setVisible(gameState.getObject().getStatus() == GameStatus.INPUT || gameState.getObject().getStatus() == GameStatus.ENDROUND);
+        setVisible(gameState.getObject()!=null && (gameState.getObject().getStatus() == GameStatus.INPUT || gameState.getObject().getStatus() == GameStatus.ENDROUND));
     }
 }

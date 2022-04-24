@@ -11,6 +11,10 @@ public class Player implements Serializable {
 
     private String name;
 
+    private String gameSessionId;
+
+    private boolean hoster;
+
     private Legionnaire character;
 
     private int lastGameStateVersionRendered;
