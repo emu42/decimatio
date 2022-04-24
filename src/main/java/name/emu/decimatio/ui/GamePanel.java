@@ -62,6 +62,6 @@ public class GamePanel extends Panel {
     @Override
     protected void onConfigure() {
         super.onConfigure();
-        setVisible(gameState.getObject()!=null && (gameState.getObject().getStatus() == GameStatus.INPUT || gameState.getObject().getStatus() == GameStatus.ENDROUND));
+        setVisible(gameState.getObject()!=null && (gameState.getObject().getStatus() == GameStatus.INPUT || gameState.getObject().getStatus() == GameStatus.SCORE || gameState.getObject().getStatus() == GameStatus.MOVING || gameState.getObject().getStatus() == GameStatus.ENDROUND));
     }
 }

@@ -34,7 +34,7 @@ public class LegionnaireImageModel implements IModel<ResourceReference> {
             }
 
             GameStatus status = GameSessionSingleton.findForGameSessionId(player.getGameSessionId()).getStatus();
-            if (status == GameStatus.MOVING || isPlayerCharacter) {
+            if (status == GameStatus.MOVING) {
                 switch (legionnaire.getUpcomingMove()) {
                     case PUSH_LEFT:
                         action = "pushleft";
