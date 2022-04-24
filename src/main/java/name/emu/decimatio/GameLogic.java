@@ -36,12 +36,14 @@ public class GameLogic {
 
     public static synchronized String addPlayer(GameState gameState, Player player) {
         String error = null;
-        if (!gameState.getPlayers().contains(player)) {
+        if (gameState.getStatus() == GameStatus.LOBBY && !gameState.getPlayers().contains(player)) {
             if (gameState.getPlayers().size() <= 10) {
                 gameState.getPlayers().add(player);
             } else {
                 error = "Game session already full.";
             }
+        } else {
+            error = "Cannot join in phase " + gameState.getStatus();
         }
         return error;
     }

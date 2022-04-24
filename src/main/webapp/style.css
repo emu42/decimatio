@@ -144,3 +144,11 @@ h3 {
 body {
 	font-family: "Nimbus Roman";
 }
+.controls {
+	text-align: center;
+}
+.controls input {
+	margin: 15px;
+	padding: 10px;
+	font-size: 40px;
+}

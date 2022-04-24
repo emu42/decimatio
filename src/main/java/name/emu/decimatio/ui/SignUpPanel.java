@@ -2,11 +2,11 @@ package name.emu.decimatio.ui;
 
 import name.emu.decimatio.GameLogic;
 import name.emu.decimatio.model.GameState;
+import name.emu.decimatio.model.GameStatus;
 import name.emu.decimatio.model.Player;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.EmailTextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -74,6 +74,6 @@ public class SignUpPanel extends Panel {
     protected void onConfigure() {
         super.onConfigure();
 
-        setVisible(Strings.isEmpty(player.getObject().getName()));
+        setVisible(Strings.isEmpty(player.getObject().getName()) && (gameState.getObject() == null || gameState.getObject().getStatus() == GameStatus.LOBBY));
     }
 }
