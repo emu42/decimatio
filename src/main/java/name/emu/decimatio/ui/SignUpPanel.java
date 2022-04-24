@@ -20,11 +20,14 @@ public class SignUpPanel extends Panel {
 
     private IModel<String> inquiryModel;
 
-    public SignUpPanel(final String id, IModel<GameState> gameState, IModel<String> playerName) {
+    private GlobalRefreshCallback refreshCallback;
+
+    public SignUpPanel(final String id, IModel<GameState> gameState, IModel<String> playerName, GlobalRefreshCallback refreshCallback) {
         super(id);
         Form form = new Form("form");
         this.gameState = gameState;
         this.playerName = playerName;
+        this.refreshCallback = refreshCallback;
 
         this.setOutputMarkupPlaceholderTag(true);
         inquiryModel = Model.of("What is your name, legionnaire?");
@@ -47,6 +50,8 @@ public class SignUpPanel extends Panel {
                 if (newInquiry != null) {
                     inquiryModel.setObject(newInquiry);
                     target.add(inquiry);
+                } else {
+                    refreshCallback.globalRefresh(target);
                 }
             }
         };

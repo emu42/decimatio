@@ -33,10 +33,12 @@ public class GamePanel extends Panel {
 
     private List<WebMarkupContainer> imgContainers = new ArrayList<>();
 
-    public GamePanel(final String id, IModel<GameState> gameState) {
+    private GlobalRefreshCallback refreshCallback;
+
+    public GamePanel(final String id, IModel<GameState> gameState, GlobalRefreshCallback refreshCallback) {
         super(id, gameState);
         this.gameState = gameState;
-
+        this.refreshCallback = refreshCallback;
         RepeatingView legionnaireImageRow = new RepeatingView("imageRow");
         RepeatingView legionnaireNameRow = new RepeatingView("nameRow");
         RepeatingView numeralRow = new RepeatingView("numeralRow");

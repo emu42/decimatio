@@ -15,17 +15,20 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class HomePage extends WebPage {
+public class HomePage extends WebPage implements GlobalRefreshCallback {
 	private static final long serialVersionUID = 1L;
 
 	private IModel<String> playerName;
 
+	private GamePanel gamePanel;
+
+	private LobbyPanel lobbyPanel;
+
+	private SignUpPanel signUpPanel;
+
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
 		IModel<GameState> gameState = new GameStateModel();
-		GamePanel gamePanel;
-		LobbyPanel lobbyPanel;
-		SignUpPanel signUpPanel;
 
 		Session.get().bind();
 		String sessionId = Session.get().getId();
@@ -38,9 +41,9 @@ public class HomePage extends WebPage {
 			System.err.println(error);
 		}
 
-		signUpPanel = new SignUpPanel("signUpPanel", gameState, playerName);
-		lobbyPanel = new LobbyPanel("lobbyPanel", gameState, playerName);
-		gamePanel = new GamePanel("gamePanel", gameState);
+		signUpPanel = new SignUpPanel("signUpPanel", gameState, playerName, this);
+		lobbyPanel = new LobbyPanel("lobbyPanel", gameState, playerName, this);
+		gamePanel = new GamePanel("gamePanel", gameState, this);
 
 		Label updater = new Label("updater", "");
 		updater.add(new AjaxSelfUpdatingTimerBehavior(Duration.ofSeconds(1)) {
@@ -50,21 +53,24 @@ public class HomePage extends WebPage {
 
 				Player player = GameSessionSingleton.findOrCreateForSessionId(Session.get().getId());
 				GameState gameState = GameSessionSingleton.getTheSingleton().getGameState();
-				if (player != null && player.getLastGameStateVersionRendered() != gameState.getVersion()) {
-					target.add(signUpPanel);
-					target.add(gamePanel);
-					target.add(lobbyPanel);
+				if (player != null && gameState!=null && player.getLastGameStateVersionRendered() != gameState.getVersion()) {
 					player.setLastGameStateVersionRendered(gameState.getVersion());
+					globalRefresh(target);
 				}
 
 			}
 		});
 		add(updater);
 
-
 		add(signUpPanel);
 		add(lobbyPanel);
 		add(gamePanel);
 
+	}
+
+	public void globalRefresh(AjaxRequestTarget target) {
+		target.add(signUpPanel);
+		target.add(gamePanel);
+		target.add(lobbyPanel);
 	}
 }

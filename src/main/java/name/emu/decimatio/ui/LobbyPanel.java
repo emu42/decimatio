@@ -24,9 +24,12 @@ public class LobbyPanel extends Panel {
 
     private IModel<String> playerName;
 
-    public LobbyPanel(final String id, IModel<GameState> gameState, IModel<String> playerName) {
+    private GlobalRefreshCallback refreshCallback;
+
+    public LobbyPanel(final String id, IModel<GameState> gameState, IModel<String> playerName, GlobalRefreshCallback refreshCallback) {
         super(id, gameState);
         this.gameState = gameState;
+        this.refreshCallback = refreshCallback;
         List<IColumn<Player, String>> columns = new ArrayList<>();
         DefaultDataTable<Player, String> playerTable;
         this.setOutputMarkupPlaceholderTag(true);
