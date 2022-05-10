@@ -136,8 +136,8 @@ h3 {
 	}
 }
 .commander {
-	position: absolute;
-	top: 600px;
+	position: relative;
+	top: 500px;
 	z-index: 100;
 }
 .legionnaire {
