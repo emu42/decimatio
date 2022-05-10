@@ -1,4 +1,4 @@
-package name.emu.decimatio.ui;
+package name.emu.decimatio.ui.model;
 
 import name.emu.decimatio.model.GameState;
 import org.apache.wicket.model.IModel;

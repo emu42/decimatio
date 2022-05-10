@@ -1,5 +1,7 @@
-package name.emu.decimatio.model;
+package name.emu.decimatio.ui.model;
 
+import name.emu.decimatio.model.Commander;
+import name.emu.decimatio.model.CommanderStatus;
 import name.emu.decimatio.ui.GamePanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.PackageResourceReference;
@@ -17,7 +19,7 @@ public class CommanderImageModel implements IModel<ResourceReference> {
     public ResourceReference getObject() {
         final String image;
         Commander commander = commanderModel.getObject();
-        if (commander != null && commander.getStatus()!=CommanderStatus.ABSENT) {
+        if (commander != null && commander.getStatus()!= CommanderStatus.ABSENT) {
             String action;
             switch (commander.getStatus()) {
                 case FACING_TROOPS:

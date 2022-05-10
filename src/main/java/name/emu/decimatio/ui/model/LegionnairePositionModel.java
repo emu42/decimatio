@@ -1,6 +1,9 @@
-package name.emu.decimatio.model;
+package name.emu.decimatio.ui.model;
 
 import java.util.List;
+
+import name.emu.decimatio.model.GameState;
+import name.emu.decimatio.model.Legionnaire;
 import org.apache.wicket.model.IModel;
 
 public class LegionnairePositionModel implements IModel<Legionnaire> {

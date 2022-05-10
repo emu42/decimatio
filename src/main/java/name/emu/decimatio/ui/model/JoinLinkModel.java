@@ -1,7 +1,8 @@
-package name.emu.decimatio.ui;
+package name.emu.decimatio.ui.model;
 
 import name.emu.decimatio.GameSessionSingleton;
 import name.emu.decimatio.model.Player;
+import name.emu.decimatio.ui.HomePage;
 import org.apache.wicket.Session;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.mapper.parameter.PageParameters;

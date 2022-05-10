@@ -1,7 +1,5 @@
 package name.emu.decimatio.ui;
 
-import name.emu.decimatio.model.LegionnaireImageModel;
-import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;

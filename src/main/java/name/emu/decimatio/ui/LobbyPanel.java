@@ -8,6 +8,7 @@ import name.emu.decimatio.model.GameState;
 import name.emu.decimatio.model.GameStatus;
 import name.emu.decimatio.model.Player;
 import name.emu.decimatio.model.PlayerListProvider;
+import name.emu.decimatio.ui.model.JoinLinkModel;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;

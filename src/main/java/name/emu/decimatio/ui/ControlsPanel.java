@@ -1,7 +1,7 @@
 package name.emu.decimatio.ui;
 
 import name.emu.decimatio.model.GameState;
-import name.emu.decimatio.model.GameStateModel;
+import name.emu.decimatio.ui.model.GameStateModel;
 import name.emu.decimatio.model.GameStatus;
 import name.emu.decimatio.model.Legionnaire;
 import name.emu.decimatio.model.Move;

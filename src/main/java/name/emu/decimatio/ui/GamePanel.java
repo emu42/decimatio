@@ -2,14 +2,11 @@ package name.emu.decimatio.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import name.emu.decimatio.model.CommanderImageModel;
-import name.emu.decimatio.model.CommanderPositionModel;
+
+import name.emu.decimatio.ui.model.*;
 import name.emu.decimatio.model.GameState;
 import name.emu.decimatio.model.GameStatus;
 import name.emu.decimatio.model.Legionnaire;
-import name.emu.decimatio.model.LegionnaireImageModel;
-import name.emu.decimatio.model.LegionnairePositionModel;
-import name.emu.decimatio.model.PlayerLegionnaireModel;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;

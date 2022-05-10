@@ -1,5 +1,9 @@
-package name.emu.decimatio.model;
+package name.emu.decimatio.ui.model;
 
+import name.emu.decimatio.model.Commander;
+import name.emu.decimatio.model.CommanderStatus;
+import name.emu.decimatio.model.GameState;
+import name.emu.decimatio.model.GameStatus;
 import org.apache.wicket.model.IModel;
 
 public class CommanderPositionModel implements IModel<Commander> {

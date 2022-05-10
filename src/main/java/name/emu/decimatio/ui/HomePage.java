@@ -1,12 +1,12 @@
 package name.emu.decimatio.ui;
 
 import java.time.Duration;
-import name.emu.decimatio.GameLogic;
+
 import name.emu.decimatio.GameSessionSingleton;
 import name.emu.decimatio.model.GameState;
-import name.emu.decimatio.model.GameStateModel;
+import name.emu.decimatio.ui.model.GameStateModel;
 import name.emu.decimatio.model.Player;
-import name.emu.decimatio.model.PlayerModel;
+import name.emu.decimatio.ui.model.PlayerModel;
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;

@@ -1,6 +1,9 @@
-package name.emu.decimatio.model;
+package name.emu.decimatio.ui.model;
 
 import name.emu.decimatio.GameSessionSingleton;
+import name.emu.decimatio.model.GameStatus;
+import name.emu.decimatio.model.Legionnaire;
+import name.emu.decimatio.model.Player;
 import name.emu.decimatio.ui.GamePanel;
 import org.apache.wicket.Session;
 import org.apache.wicket.model.IModel;
