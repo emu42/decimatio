@@ -15,6 +15,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataT
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -29,6 +30,8 @@ public class LobbyPanel extends Panel {
     private IModel<Player> player;
 
     private GlobalRefreshCallback refreshCallback;
+
+    private IModel<Boolean> joinNewGame = Model.of(true);
 
     public LobbyPanel(final String id, IModel<GameState> gameState, IModel<Player> player, GlobalRefreshCallback refreshCallback) {
         super(id, gameState);
@@ -52,14 +55,19 @@ public class LobbyPanel extends Panel {
 
 
         Form form2 = new Form("form");
+        CheckBox joinNewGameCb = new CheckBox("joinNewGame", joinNewGame);
         AjaxButton newGame = new AjaxButton("createGameBtn") {
             @Override
             protected void onSubmit(final AjaxRequestTarget target) {
                 super.onSubmit(target);
                 gameState.setObject(GameSessionSingleton.createGameSession());
-                player.getObject().setGameSessionId(gameState.getObject().getGameSessionId());
-                player.getObject().setHoster(true);
-                GameLogic.addPlayer(gameState.getObject(), player.getObject());
+                Player p = player.getObject();
+                p.setGameSessionId(gameState.getObject().getGameSessionId());
+                p.setHoster(true);
+                p.setSpectator(Boolean.FALSE.equals(joinNewGame.getObject()));
+                if (!p.isSpectator()) {
+                    GameLogic.addPlayer(gameState.getObject(), player.getObject());
+                }
                 refreshCallback.globalRefresh(target);
             }
         };
@@ -99,6 +107,7 @@ public class LobbyPanel extends Panel {
         };
 
         form2.add(newGame);
+        form2.add(joinNewGameCb);
         setupContainer.add(form2);
         add(setupContainer);
 

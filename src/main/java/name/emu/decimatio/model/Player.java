@@ -15,6 +15,8 @@ public class Player implements Serializable {
 
     private boolean hoster;
 
+    private boolean spectator;
+
     private Legionnaire character;
 
     private int lastGameStateVersionRendered;

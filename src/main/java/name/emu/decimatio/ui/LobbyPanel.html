@@ -1,7 +1,10 @@
 <wicket:panel>
   <div wicket:id="setupContainer">
     <form wicket:id="form">
-    <input type="button" wicket:id="createGameBtn" value="Host Game"/>
+      <div>
+        <input type="checkbox" wicket:id="joinNewGame">Enter as Player
+      </div>
+      <input type="button" wicket:id="createGameBtn" value="Host Game"/>
     </form>
   </div>
   <div wicket:id="playerListContainer">

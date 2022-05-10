@@ -47,6 +47,7 @@ public class GameLogic {
         }
         return error;
     }
+
     public static void launchGame(GameState gameState) {
         List<Legionnaire> legionnaireList = gameState.getLegionnaires();
         if (gameState.getStatus() == GameStatus.LOBBY) {
